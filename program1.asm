@@ -14,6 +14,8 @@ showSum: .asciiz "\nThe sum is: "
 difference: .asciiz "\nThe difference is: "
 showMult: .asciiz "\nThe product is: "
 showDiv: .asciiz "\nThe quotient is: "
+inputEqual: .asciiz "\nUser inputs are the same."
+inputDif: .asciiz "\nUser inputs are different."
 
 .text
 main:
@@ -107,6 +109,23 @@ main:
 	#display the quotient to user
 	li $v0, 1
 	move $a0, $s5
+	syscall
+	
+# Task 3: Conditions
+	
+	#compare if two inputs are equal
+	beq $s0, $s1, showEqual
+	
+	# !($s0=$s1)
+	li $v0, 4
+	la $a0, inputDif
+	syscall
+	
+	j exit
+	
+showEqual: #$s0=$s1
+	li $v0, 4
+	la $a0, inputEqual
 	syscall
 	
 exit:

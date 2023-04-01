@@ -21,7 +21,7 @@ quotient: .float 0.0	#result of division
 .text
 main:
 
-#Task 1:
+#Task 1: User Input and Output
 	#print out getNum1
 	li $v0, 4
 	la $a0, getUserNum1

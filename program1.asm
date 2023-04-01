@@ -16,6 +16,7 @@ showMult: .asciiz "\nThe product is: "
 showDiv: .asciiz "\nThe quotient is: "
 inputEqual: .asciiz "\nUser inputs are the same."
 inputDif: .asciiz "\nUser inputs are different."
+quotient: .float 0.0	#result of division
 
 .text
 main:
@@ -99,16 +100,19 @@ main:
 	syscall
 	
 	#instruction to divide the two inputs
-	div $s5, $s0, $s1
+	mtc1 $s0, $f0
+	mtc1 $s1, $f1
+	div.s $f2, $f0, $f1
 	
 	#display message to show quotient
 	li $v0, 4
 	la $a0, showDiv
 	syscall
-	
+		
 	#display the quotient to user
-	li $v0, 1
-	move $a0, $s5
+	lw $t2, quotient
+	mov.s $f12, $f2
+	li $v0, 2
 	syscall
 	
 # Task 3: Conditions

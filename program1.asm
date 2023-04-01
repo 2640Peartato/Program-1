@@ -20,6 +20,8 @@ quotient: .float 0.0	#result of division
 
 .text
 main:
+
+#Task 1:
 	#print out getNum1
 	li $v0, 4
 	la $a0, getUserNum1

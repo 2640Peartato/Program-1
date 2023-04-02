@@ -102,9 +102,10 @@ main:
 	syscall
 	
 	#instruction to divide the two inputs
-	mtc1 $s0, $f0
-	mtc1 $s1, $f1
-	div.s $f2, $f0, $f1
+	
+	mtc1 $s0, $f0		# move to coprocessor
+	mtc1 $s1, $f1		# move $s0 and $s1 to floating point registers
+	div.s $f2, $f0, $f1	# perform floating point division
 	
 	#display message to show quotient
 	li $v0, 4
@@ -112,9 +113,9 @@ main:
 	syscall
 		
 	#display the quotient to user
-	lw $t2, quotient
-	mov.s $f12, $f2
-	li $v0, 2
+	lw $t2, quotient	# load the quotient from memory into the $t2 register
+	mov.s $f12, $f2		# move the quotient from $f2 to $f12 for printing float
+	li $v0, 2		# syscall instruction to print float
 	syscall
 	
 # Task 3: Conditions
